@@ -8,7 +8,7 @@
   notify:
     - restart service
   tags:
-    - systemd-service
+    - "role::systemd-service"
 
 - name: "create systemd target"
   template:
@@ -17,7 +17,8 @@
     mode: 0664
   with_dict: "{{ systemd_target }}"
   tags:
-    - systemd-service
+    - "role::systemd-service"
+    - "role::systemd-service:configure"
 
 - name: "enable service"
   systemd:
@@ -26,4 +27,5 @@
     daemon_reload: yes
   with_dict: "{{ systemd_service }}"
   tags:
-    - systemd-service
+    - "role::systemd-service"
+    - "role::systemd-service:configure"
