@@ -23,7 +23,7 @@
 - name: "enable service"
   systemd:
     name: "{{ item.key }}.service"
-    enabled: "{{ item.value.enabled | default(False) }}"
+    enabled: "{{ item.value.enabled | default(omit) }}"
     daemon_reload: yes
   with_dict: "{{ systemd_service }}"
   tags:
